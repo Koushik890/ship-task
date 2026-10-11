@@ -37,6 +37,7 @@ Restart Claude Code afterwards. Only `git` is needed to install.
   | new-feature, code-structure, evidence-driven-testing, unslop, greploop, greploop-apps | [michaelshimeles/skills](https://github.com/michaelshimeles/skills) |
   | before-and-after | [vercel-labs/before-and-after](https://github.com/vercel-labs/before-and-after) |
 
+- `before-and-after` comes from vercel-labs, **not** the older copy vendored inside michaelshimeles/skills. The two differ: this workflow needs the vercel-labs version (`scripts/format.mjs`, agent-browser captures, `gh --attach`). Don't run `npx skills add michaelshimeles/skills` for all skills afterwards; it would replace it with the old one. If that happens, rerun the installer.
 - Replaces older copies of those skills, including symlinks left by `npx skills add` (only the link is removed, not what it points to). A skill folder that is a git checkout is left alone.
 - Checks the tools below and tells you what is missing. It never installs system tools itself.
 
@@ -55,7 +56,7 @@ Options (environment variables): `CLAUDE_SKILLS_DIR` to install somewhere else, 
 
 ## Updating
 
-Run the install command again. To move a dependency to a newer upstream version, change its commit in `deps.lock`, test it, and push. CI installs on Linux, macOS and Windows (bash, Windows PowerShell 5.1 and PowerShell 7) on every push and weekly, so a pinned commit that disappears upstream gets caught.
+Run the install command again. To move a dependency to a newer upstream version, change its commit in `deps.lock`, test it, and push. CI installs on Linux, macOS and Windows and checks every installed file against the pinned commits, (bash, Windows PowerShell 5.1 and PowerShell 7) on every push and weekly, so a pinned commit that disappears upstream gets caught.
 
 ## License
 
