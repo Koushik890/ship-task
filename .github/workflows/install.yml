@@ -18,7 +18,7 @@ jobs:
       run:
         shell: bash
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install from checkout
         run: CLAUDE_SKILLS_DIR="$RUNNER_TEMP/local" ./install.sh
       - name: Install from GitHub (curl path)
@@ -33,7 +33,7 @@ jobs:
   powershell:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install with Windows PowerShell 5.1
         shell: powershell
         run: |

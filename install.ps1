@@ -117,6 +117,8 @@ try {
 
     Write-Host ''
     Write-Host 'Done. Restart Claude Code, then run: /ship-task <task description>'
+    # Tool probes above may leave a non-zero native exit code; the install itself succeeded.
+    $global:LASTEXITCODE = 0
 }
 finally {
     Remove-Item -LiteralPath $Work -Recurse -Force -ErrorAction SilentlyContinue
