@@ -1,0 +1,9 @@
+# Pinned dependency skills. One per line: name|git repo|commit sha|path inside repo
+# Bump a sha only after testing the new version. Installers read this file.
+new-feature|https://github.com/michaelshimeles/skills|4b72f46b045e6fef52e6a98d4c162dd309826aed|new-feature
+code-structure|https://github.com/michaelshimeles/skills|4b72f46b045e6fef52e6a98d4c162dd309826aed|code-structure
+evidence-driven-testing|https://github.com/michaelshimeles/skills|4b72f46b045e6fef52e6a98d4c162dd309826aed|evidence-driven-testing
+unslop|https://github.com/michaelshimeles/skills|4b72f46b045e6fef52e6a98d4c162dd309826aed|unslop
+greploop|https://github.com/michaelshimeles/skills|4b72f46b045e6fef52e6a98d4c162dd309826aed|greploop
+greploop-apps|https://github.com/michaelshimeles/skills|4b72f46b045e6fef52e6a98d4c162dd309826aed|greploop-apps
+before-and-after|https://github.com/vercel-labs/before-and-after|8306d34f459b6704e08e6adb5829fcddb0dc3557|skill
