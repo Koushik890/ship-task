@@ -2,6 +2,7 @@ name: install
 
 on:
   push:
+    branches: [main]
   pull_request:
   schedule:
     - cron: "0 6 * * 1" # weekly: catches pinned upstream commits disappearing
@@ -30,18 +31,28 @@ jobs:
         run: ./tests/verify.sh "$RUNNER_TEMP/remote"
 
   powershell:
-    strategy:
-      fail-fast: false
-      matrix:
-        shell: [powershell, pwsh]
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install from checkout (${{ matrix.shell }})
-        shell: ${{ matrix.shell }}
+      - name: Install with Windows PowerShell 5.1
+        shell: powershell
         run: |
-          $env:CLAUDE_SKILLS_DIR = "$env:RUNNER_TEMP\ps"
+          $env:CLAUDE_SKILLS_DIR = "$env:RUNNER_TEMP\ps5"
           ./install.ps1
+      - name: Install with PowerShell 7
+        shell: pwsh
+        run: |
+          $env:CLAUDE_SKILLS_DIR = "$env:RUNNER_TEMP\ps7"
+          ./install.ps1
+      - name: Install via irm | iex
+        if: github.event_name != 'pull_request'
+        shell: powershell
+        run: |
+          $env:CLAUDE_SKILLS_DIR = "$env:RUNNER_TEMP\psremote"
+          $env:SHIP_TASK_REF = "$env:GITHUB_SHA"
+          irm "https://raw.githubusercontent.com/$env:GITHUB_REPOSITORY/$env:GITHUB_SHA/install.ps1" | iex
       - name: Verify
         shell: bash
-        run: ./tests/verify.sh "$RUNNER_TEMP/ps"
+        run: |
+          ./tests/verify.sh "$RUNNER_TEMP/ps5" "$RUNNER_TEMP/ps7"
+          if [ "${{ github.event_name }}" != pull_request ]; then ./tests/verify.sh "$RUNNER_TEMP/psremote"; fi
